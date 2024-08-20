@@ -2,7 +2,7 @@ import * as Vue from 'vue'
 import Router from './router/index.js'
 import store from './store/index.js'
 import App from './App.vue'
-
+import EventManager from './EventManager.js'
 /* Fin liste des apps */
 const AppList = {
     //"App": () => import('./app/Login.vue'),
@@ -18,7 +18,7 @@ const storeList = {
 export default class AppController {
     app = {};
     params = {};
-
+    eventManager = new EventManager();
     async loadApp(appName,params){
 
         if(this.app[appName] !== undefined) return;
@@ -30,14 +30,13 @@ export default class AppController {
             params: this.params[appName],
             appName
         }
-
+        console.log("o")
         let div = document.createElement("DIV");
         div.id = appName
         div.classList = ["body-simul"]
         document.body.appendChild(div);
-
+        instance.provide("dynamicComponent", Vue.shallowRef(Router[`${appName}/index`]))
         instance.mount("#" + appName)
-        instance._instance.data.dynamicComponent = Vue.shallowRef(Router[`${appName}/index`])
         this.app[appName] = instance;
     }
 

@@ -7,7 +7,8 @@ import AppController from './AppController.js'
 
 let controller = new AppController()
 
-//controller.loadApp("App", {})
+//controller.loadApp("Login", {})
+
 
 window.controller = controller
 //var app = createApp(App)

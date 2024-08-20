@@ -1,12 +1,13 @@
 <template>
-  <component :is="this.dynamicComponent" />
+  <component :is="dynamicComponent" />
 </template>
 
 <script>
 export default{
+  inject: ['dynamicComponent'],
   data(){
     return {
-      dynamicComponent:null
+      //dynamicComponent:null
     }
   }
 }
