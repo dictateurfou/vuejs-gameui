@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-legacy": "^5.4.1",
+    "pinia": "^2.2.6",
     "vue": "^3.4.29",
     "vuex": "^4.1.0"
   },

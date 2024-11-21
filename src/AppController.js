@@ -2,7 +2,12 @@ import * as Vue from 'vue'
 import Router from './router/index.js'
 import store from './store/index.js'
 import App from './App.vue'
+import { createPinia } from 'pinia'
 import EventManager from './EventManager.js'
+import RegisterDirectives from './directives/index.js'
+
+const pinia = createPinia()
+
 /* Fin liste des apps */
 const AppList = {
     //"App": () => import('./app/Login.vue'),
@@ -20,22 +25,23 @@ export default class AppController {
     params = {};
     eventManager = new EventManager();
     async loadApp(appName,params){
-
         if(this.app[appName] !== undefined) return;
         this.params[appName] = params;
         await this.loadStore(appName);
         const instance = Vue.createApp(App)
+        RegisterDirectives(instance)
         instance.config.globalProperties = {
             controller: this,
             params: this.params[appName],
-            appName
+            appName,
         }
-        console.log("o")
+
         let div = document.createElement("DIV");
         div.id = appName
         div.classList = ["body-simul"]
         document.body.appendChild(div);
         instance.provide("dynamicComponent", Vue.shallowRef(Router[`${appName}/index`]))
+        instance.use(pinia)
         instance.mount("#" + appName)
         this.app[appName] = instance;
     }

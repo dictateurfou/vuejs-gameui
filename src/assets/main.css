@@ -13,11 +13,13 @@
 
 body{
   width:100%;
-  height:auto;
+  height:100%;
   overflow: auto;
   padding:0em;
   margin:0em;
+  content: " ";
 }
+
 
 
 @keyframes slide-in {

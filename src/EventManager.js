@@ -14,7 +14,8 @@ export default class EventManager{
     }
 
     callGameEvent(event,...args){
-        //Not implemented
+        //CallUnreal is c++ function working with array of json for easy deserialization
+        CallUnreal(event,JSON.stringify([...args]))
     }
 
 }
